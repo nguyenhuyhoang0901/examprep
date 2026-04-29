@@ -1,0 +1,86 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { useAuth } from "@/components/auth/AuthProvider"
+import BuyButton from "./BuyButton"
+import FullQuestions from "./FullQuestions"
+
+type Props = {
+  providerId: string
+  examCode: string
+  price: number
+}
+
+export default function ExamClient({
+  providerId,
+  examCode,
+  price,
+}: Props) {
+  const { user, loading } = useAuth()
+  const [questions, setQuestions] = useState<any[] | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!user) return
+
+    const load = async () => {
+      const token = await user.getIdToken()
+
+      const res = await fetch(
+        `/api/full-questions?providerId=${providerId}&examCode=${examCode}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      if (res.status === 403) {
+        setQuestions(null)
+        return
+      }
+
+      const data = await res.json()
+      setQuestions(data.questions)
+    }
+
+    load()
+  }, [user])
+
+  if (loading) return null
+
+  // ❌ Chưa login
+  if (!user) {
+    return (
+      <p className="mt-8 text-center text-gray-500">
+        🔒 Login and Buy Exam
+      </p>
+        <BuyButton
+          providerId={providerId}
+          examCode={examCode}
+          price={price}
+          userId={user.uid}
+        />
+    )
+  }
+
+  // ❌ Chưa mua
+  if (!questions) {
+    return (
+      <div className="mt-8 p-6 border rounded text-center">
+        <p className="mb-4 text-gray-600">
+          🔒 Mua đề để mở khóa toàn bộ câu hỏi
+        </p>
+        <BuyButton
+          providerId={providerId}
+          examCode={examCode}
+          price={price}
+          userId={user.uid}
+        />
+      </div>
+    )
+  }
+
+  // ✅ ĐÃ MUA
+  return <FullQuestions questions={questions} />
+}

@@ -1,0 +1,12 @@
+import LoginForm from '@/components/auth/LoginForm'
+import SignupForm from '@/components/auth/SignupForm'
+
+export default function JoinPage({
+  searchParams,
+}: {
+  searchParams: { action?: string }
+}) {
+  const action = searchParams.action ?? 'signup'
+
+  return action === 'login' ? <LoginForm /> : <SignupForm />
+}
