@@ -1,6 +1,8 @@
 import { getAllProviders } from "@/lib/firebase/getAllProviders";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ExamsPage() {
   const providers = await getAllProviders();
 
