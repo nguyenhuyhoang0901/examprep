@@ -3,7 +3,7 @@ import { adminDb } from "@/lib/firebase-admin";
 export async function getAllProviders() {
   const providersSnap = await adminDb
     .collection("providers")
-    .orderBy("order", "asc")
+    .orderBy("name", "asc")
     .get();
 
   const providers = await Promise.all(

@@ -1,3 +1,4 @@
+// app/exams/page.tsx
 import { getAllProviders } from "@/lib/firebase/getAllProviders";
 import Link from "next/link";
 
@@ -5,7 +6,6 @@ export const dynamic = 'force-dynamic';
 
 export default async function ExamsPage() {
   const providers = await getAllProviders();
-
   return (
     <>
       {/* HERO */}
@@ -18,18 +18,25 @@ export default async function ExamsPage() {
         </p>
       </section>
 
-      {/* LIST */}
-      <section className="max-w-4xl mx-auto px-4 py-12">
-        <ul className="space-y-4">
+      {/* GRID */}
+      <section className="max-w-6xl mx-auto px-4 py-12">
+        <ul
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "1rem",
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+          }}
+        >
           {providers.map((provider: any) => (
             <li key={provider.id}>
               <Link
                 href={`/exams/${provider.slug}`}
                 className="block border rounded-lg px-6 py-4 hover:bg-gray-50 hover:shadow-sm transition"
               >
-                <span className="font-medium">
-                  {provider.name}
-                </span>
+                <span className="font-medium">{provider.name}</span>
                 <span className="text-gray-500 text-sm ml-2">
                   ({provider.examCount} exam
                   {provider.examCount !== 1 && "s"})
