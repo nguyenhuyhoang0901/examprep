@@ -52,13 +52,10 @@ export default async function VoucherPage() {
                       Exam
                     </th>
                     <th className="border px-3 py-2">
-                      Code
-                    </th>
-                    <th className="border px-3 py-2">
                       Exam Price (USD)
                     </th>
                     <th className="border px-3 py-2">
-                      Voucher Price (USD)
+                      Voucher Discount (USD)
                     </th>
                     <th className="border px-3 py-2">
                       Price (VND)
@@ -71,7 +68,6 @@ export default async function VoucherPage() {
                     ([trackId, track]: any) =>
                       track.items.map((item: any) => (
                         <tr
-                          key={`${provider.id}-${item.examCode}`}
                           className="hover:bg-gray-50"
                         >
                           <td className="border px-3 py-2">
@@ -80,10 +76,6 @@ export default async function VoucherPage() {
 
                           <td className="border px-3 py-2">
                             {item.title}
-                          </td>
-
-                          <td className="border px-3 py-2 font-semibold text-center">
-                            {item.examCode}
                           </td>
 
                           <td className="border px-3 py-2 text-center">
