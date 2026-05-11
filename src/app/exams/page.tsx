@@ -1,9 +1,7 @@
 // app/exams/page.tsx
 import { getAllProviders } from "@/lib/firebase/getAllProviders";
 import Link from "next/link";
-
 export const dynamic = 'force-dynamic';
-
 export default async function ExamsPage() {
   const providers = await getAllProviders();
   return (
@@ -17,19 +15,9 @@ export default async function ExamsPage() {
           Select a provider to view available exams.
         </p>
       </section>
-
       {/* GRID */}
       <section className="max-w-6xl mx-auto px-4 py-12">
-        <ul
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "1rem",
-            listStyle: "none",
-            padding: 0,
-            margin: 0,
-          }}
-        >
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 m-0">
           {providers.map((provider: any) => (
             <li key={provider.id}>
               <Link
