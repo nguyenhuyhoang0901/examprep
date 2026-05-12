@@ -189,6 +189,7 @@ const CONTACT_LINKS = [
   { label: "Email:", value: "sp.examprep@gmail.com", href: "mailto:sp.examprep@gmail.com" },
   { label: "Zalo:", value: "zalo/examprep", href: "https://zalo.me/0386989724" },
   { label: "Facebook:", value: "facebook.com/examprep", href: "https://www.facebook.com/groups/24998889806451870" },
+  { label: "Hotline:", value: "(+84).386.989.724", href: "tel:+84386989724" },
 ];
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
