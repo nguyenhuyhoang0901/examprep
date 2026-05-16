@@ -66,8 +66,9 @@ export default async function VoucherPage() {
                 <tbody>
                   {Object.entries(provider.tracks).flatMap(
                     ([trackId, track]: any) =>
-                      track.items.map((item: any) => (
+                      track.items.map((item: any, itemIndex: number) => (
                         <tr
+                          key={`${trackId}-${itemIndex}`}
                           className="hover:bg-gray-50"
                         >
                           <td className="border px-3 py-2">
